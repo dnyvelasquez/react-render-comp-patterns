@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { TodoHeader } from "../TodoHeader";
 import { TodoCounter } from "../TodoCounter";
 import { TodoSearch } from "../TodoSearch";
@@ -12,9 +12,7 @@ import { TodoForm } from "../TodoForm";
 import { Modal } from "../Modal";
 import { useTodos } from "./useTodos";
 
-
 function App() {
-
   const {
     loading,
     error,
@@ -32,21 +30,30 @@ function App() {
 
   return (
     <>
-      <TodoHeader>
-        <TodoCounter totalTodos={totalTodos} completedTodos={completedTodos} />
-        <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+      <TodoHeader loading={loading}>
+        <TodoCounter 
+          totalTodos={totalTodos} 
+          completedTodos={completedTodos} 
+        />
+        <TodoSearch 
+          searchValue={searchValue} 
+          setSearchValue={setSearchValue} 
+        />
       </TodoHeader>
-      <TodoList>
-        {loading && (
-          <>
-            <TodosLoading />
-            <TodosLoading />
-            <TodosLoading />
-          </>
+      <TodoList
+        error={error}
+        loading={loading}
+        searchedTodos={searchedTodos}
+        searchValue={searchValue}
+        totalTodos={totalTodos}
+        onError={() => <TodosError />}
+        onLoading={() => <TodosLoading />}
+        onEmptyTodos={() => <EmptyTodos />}
+        onEmptySearchResults={(searchValue) => (
+          <p>No se encontró {searchValue}</p>
         )}
-        {error && <TodosError />}
-        {!loading && searchedTodos.length === 0 && <EmptyTodos />}
-        {searchedTodos.map((todo) => (
+      >
+        {(todo) => (
           <TodoItem
             key={todo.text}
             text={todo.text}
@@ -54,14 +61,14 @@ function App() {
             onComplete={() => completeTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
           />
-        ))}
+        )}
       </TodoList>
-      <CreateTodoButton setOpenModal={setOpenModal} />
-      {openModal && (
+      {!!openModal && (
         <Modal>
-          <TodoForm addTodo={addTodo} setOpenModal={setOpenModal}/>
+          <TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
         </Modal>
       )}
+      <CreateTodoButton setOpenModal={setOpenModal} />
     </>
   );
 }
