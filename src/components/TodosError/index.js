@@ -3,7 +3,7 @@ import "./main.css";
 
 function TodosError() {
   return(
-    <p>Ha habido un error!!!</p>
+    <p>Something went wrong!!!</p>
   );
 }
 

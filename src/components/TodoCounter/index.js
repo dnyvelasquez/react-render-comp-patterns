@@ -5,7 +5,7 @@ function TodoCounter({ totalTodos, completedTodos, loading }) {
     
     return (
         <h1 className={`TodoCounter${!!loading && '--loading'}`}>
-            Has completado <span>{completedTodos}</span> de <span>{totalTodos}</span> Todos
+            You have completed <span>{completedTodos}</span> of <span>{totalTodos}</span> TODOs
         </h1>
     );
   }

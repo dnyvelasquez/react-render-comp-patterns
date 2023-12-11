@@ -11,7 +11,7 @@ function ChangeAlert({ sincronize }) {
       <div className='ChangeAlert-bg'>
         <div className='ChangeAlert-container'>
           <p>Changed detected in another tab.</p>
-          <p>Click refresh the TODOs.</p>
+          <p>Click to refresh the TODOs.</p>
           <button
             className='TodoForm-button TodoForm-button--add'
             onClick={toggleShow}

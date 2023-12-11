@@ -3,7 +3,7 @@ import "./main.css";
 
 function EmptyTodos() {
   return(
-    <p>Crea un TODO</p>
+    <p>Create a TODO</p>
   );
 }
 

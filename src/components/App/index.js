@@ -52,7 +52,7 @@ function App() {
         onLoading={() => <TodosLoading />}
         onEmptyTodos={() => <EmptyTodos />}
         onEmptySearchResults={(searchValue) => (
-          <p>No se encontró {searchValue}</p>
+          <p>Not found {searchValue}</p>
         )}
       >
         {(todo) => (
