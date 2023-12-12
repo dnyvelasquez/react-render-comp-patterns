@@ -12,6 +12,7 @@ import { TodoForm } from "../TodoForm";
 import { Modal } from "../Modal";
 import { useTodos } from "./useTodos";
 import { ChangeAlert } from "../ChangeAlert";
+import "./main.css";
 
 function App() {
   const {
@@ -31,50 +32,49 @@ function App() {
   } = useTodos();
 
   return (
-    <>
-      <TodoHeader loading={loading}>
-        <TodoCounter
-          totalTodos={totalTodos}
-          completedTodos={completedTodos}
-        />
-        <TodoSearch
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
-      </TodoHeader>
-      <TodoList
-        error={error}
-        loading={loading}
-        searchedTodos={searchedTodos}
-        searchValue={searchValue}
-        totalTodos={totalTodos}
-        onError={() => <TodosError />}
-        onLoading={() => <TodosLoading />}
-        onEmptyTodos={() => <EmptyTodos />}
-        onEmptySearchResults={(searchValue) => (
-          <p>Not found {searchValue}</p>
-        )}
-      >
-        {(todo) => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
+    <div className="global-container">
+      <div className="app-container">
+        <TodoHeader loading={loading}>
+          <TodoCounter
+            totalTodos={totalTodos}
+            completedTodos={completedTodos}
           />
+          <TodoSearch
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          />
+        </TodoHeader>
+        <TodoList
+          error={error}
+          loading={loading}
+          searchedTodos={searchedTodos}
+          searchValue={searchValue}
+          totalTodos={totalTodos}
+          onError={() => <TodosError />}
+          onLoading={() => <TodosLoading />}
+          onEmptyTodos={() => <EmptyTodos />}
+          onEmptySearchResults={(searchValue) => <p>Not found {searchValue}</p>}
+        >
+          {(todo) => (
+            <TodoItem
+              key={todo.text}
+              text={todo.text}
+              completed={todo.completed}
+              onComplete={() => completeTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
+            />
+          )}
+        </TodoList>
+        {!!openModal && (
+          <Modal>
+            <TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
+          </Modal>
         )}
-      </TodoList>
-      {!!openModal && (
-        <Modal>
-          <TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
-        </Modal>
-      )}
-      <CreateTodoButton setOpenModal={setOpenModal} />
-      <ChangeAlert sincronize={sincronizeTodos} />
-    </>
+        <CreateTodoButton setOpenModal={setOpenModal} />
+        <ChangeAlert sincronize={sincronizeTodos} />
+      </div>
+    </div>
   );
 }
 
 export default App;
-
