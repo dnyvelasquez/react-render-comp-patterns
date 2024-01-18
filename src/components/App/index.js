@@ -16,20 +16,28 @@ import "./main.css";
 
 function App() {
   const {
-    loading,
-    error,
-    searchedTodos,
-    completeTodo,
-    deleteTodo,
-    openModal,
-    setOpenModal,
-    completedTodos,
-    totalTodos,
-    searchValue,
-    setSearchValue,
-    addTodo,
-    sincronizeTodos,
+    states,
+    stateUpdaters,
   } = useTodos();
+
+  const {
+    error,
+    loading,
+    searchedTodos,
+    totalTodos,
+    completeTodo,
+    completedTodos,
+    openModal,
+    searchValue,
+  } = states;
+
+  const {
+    setOpenModal,
+    addTodo,
+    deleteTodo,
+    setSearchValue,
+    sincronizeTodos,
+  } = stateUpdaters;
 
   return (
     <div className="global-container">
